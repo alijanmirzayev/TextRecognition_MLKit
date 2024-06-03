@@ -26,14 +26,18 @@ class TextViewModel : ViewModel() {
 
     fun textRecognitionFromURI(context: Context, uri: Uri) {
         viewModelScope.launch(Dispatchers.Default) {
-            image = InputImage.fromFilePath(context, uri)
-            recognizer.process(image)
-                .addOnSuccessListener { visionText ->
-                    _text.value = visionText.text
-                }
-                .addOnFailureListener { e ->
-                    _text.value = e.localizedMessage?.toString()
-                }
+            try {
+                image = InputImage.fromFilePath(context, uri)
+                recognizer.process(image)
+                    .addOnSuccessListener { visionText ->
+                        _text.value = visionText.text
+                    }
+                    .addOnFailureListener { e ->
+                        _errorMessage.value = e.localizedMessage?.toString()
+                    }
+            } catch (e: Exception){
+                _errorMessage.value = e.localizedMessage?.toString()
+            }
         }
     }
 

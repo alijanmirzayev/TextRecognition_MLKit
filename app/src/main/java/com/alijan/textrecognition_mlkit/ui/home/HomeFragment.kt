@@ -34,21 +34,18 @@ class HomeFragment : Fragment() {
     }
 
     private fun buttonClick() {
-        // Click event get image from gallery
-        binding.buttonOpenGallery.setOnClickListener {
-            galleryLauncher.launch("image/*")
-        }
+        binding.apply {
+            // Click event get image from gallery
+            buttonOpenGallery.setOnClickListener {
+                galleryLauncher.launch("image/*")
+            }
 
-        // Click event open camera
-        binding.buttonOpenCamera.setOnClickListener {
-
-        }
-
-        // Click event select image
-        binding.buttonSelectImage.setOnClickListener {
-            findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToTextFragment()
-            )
+            // Click event select image
+            buttonSelectImage.setOnClickListener {
+                findNavController().navigate(
+                    HomeFragmentDirections.actionHomeFragmentToTextFragment()
+                )
+            }
         }
     }
 
